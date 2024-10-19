@@ -1,10 +1,5 @@
-// src/loginC/candidato.entity.ts
-import { Habilidades } from '../ambos/compartilhado.entity'; // Supondo que você tenha uma entity para habilidades
-import { Interesses } from '../ambos/compartilhado.entity';
-import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn } from 'typeorm';
-/* as chaves primarias e @manyTo algo, tem problema pq falta
- fazer as importacoes das entitys de outras tabelas*/
-
+import { Habilidades, Interesses, Endereco } from '../ambos/compartilhado.entity';
+import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, OneToMany } from 'typeorm';
 
 @Entity('candidato')
 export class Candidato {
@@ -17,7 +12,7 @@ export class Candidato {
   @Column({ length: 30 })
   email: string;
 
-  @Column({ length: 11 })
+  @Column({ length: 15 })
   telefone: string;
 
   @Column({ length: 15 })
@@ -25,7 +20,6 @@ export class Candidato {
 
   @Column({ length: 50 })
   bio: string;
-
 
   @Column({ length: 15 })
   fluencia: string;
@@ -36,17 +30,34 @@ export class Candidato {
   @Column({ length: 18 })
   senha: string;
 
-
   @Column({ length: 50 })
   nomesocial: string;
 
   @Column({ length: 4 })
   numero: string;
 
-  @Column({ length: 50 })
+  @Column({ length: 11 })
   dataNascimento: string;
 
+  @Column({ length: 9 })
+  cep: string;
+
   @Column({ length: 50 })
+  rua: string;
+
+  @Column({ length: 50 })
+  bairro: string;
+
+  @Column({ length: 50 })
+  cidade: string;
+
+  @Column({ length: 50 })
+  estado: string;
+
+  @Column({ length: 50 })
+  pais: string;
+
+  @Column({ length: 5 })
   rm: string;
 
   @Column({ length: 50 })
@@ -65,6 +76,5 @@ export class Candidato {
   @OneToOne(() => Habilidades)
   @JoinColumn({ name: 'habilidades_id' })
   habilidades: Habilidades;
-
   
 }

@@ -1,5 +1,4 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
-import { Endereco } from '../ambos/compartilhado.entity'; // Importação da entidade Endereco
 import { SegmentoAtuacao } from './segmentoAtuacao.entity'; // Importação da entidade SegmentoAtuacao
 
 @Entity()
@@ -15,6 +14,24 @@ export class Empresa {
 
   @Column()
   email: string;
+
+  @Column({ length: 9 })
+  cep: string;
+
+  @Column({ length: 50 })
+  rua: string;
+
+  @Column({ length: 50 })
+  bairro: string;
+
+  @Column({ length: 50 })
+  cidade: string;
+
+  @Column({ length: 50 })
+  estado: string;
+
+  @Column({ length: 50 })
+  pais: string;
 
   @Column()
   fotoperfil: string;
@@ -36,12 +53,6 @@ export class Empresa {
 
   @Column('text')
   descricao: string;
-  
-
-  
-  @ManyToOne(() => Endereco, { eager: true }) 
-  @JoinColumn({ name: 'endereco_id' })
-  endereco: Endereco;
 
   @ManyToOne(() => SegmentoAtuacao, { eager: true }) 
   @JoinColumn({ name: 'segmentoatuacao_id' })

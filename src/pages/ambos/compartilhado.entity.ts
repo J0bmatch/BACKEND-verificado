@@ -6,7 +6,7 @@ import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 @Entity('endereco')
 export class Endereco {
   @PrimaryGeneratedColumn()
-  id: number;
+  endereco_id: number;
 
   @Column({ length: 9 })
   cep: string;

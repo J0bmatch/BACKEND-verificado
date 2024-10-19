@@ -13,7 +13,7 @@ export class LoginCService {
   // Verifica login com RM e data de nascimento
   async verificarLogin(rm: string, dataNascimento: string): Promise<{ mensagem: string }> {
     const candidato = await this.candidatoRepository.findOne({
-      where: { rm, dataNascimento },
+      where: { rm, dataNascimento},
     });
 
     // Verifica se o candidato existe no banco de dados
@@ -22,17 +22,18 @@ export class LoginCService {
     }
 
     // Verifica se é o primeiro acesso com base no campo 'experiencia'
-    const primeiroAcesso = !candidato.experiencia;
+    const primeiroAcesso = !candidato.bio;
     if (primeiroAcesso) {
-      return { mensagem: 'Primeiro acesso' };
+      return { mensagem: 'Primeiro acesso', };
     } else {
-      return { mensagem: 'Acesso já realizado anteriormente' };
+      return { mensagem: 'Acesso já realizado anteriormente', };
     }
   }
 
   // Atualiza os dados do candidato
   async atualizarCadastro(rm: string, dados: Partial<Candidato>): Promise<{ mensagem: string }> {
-    const candidato = await this.candidatoRepository.findOne({ where: { rm } });
+    const candidato = await this.candidatoRepository.findOne({ where: { rm} });
+
 
     if (!candidato) {
       return { mensagem: 'Candidato não encontrado.' };
