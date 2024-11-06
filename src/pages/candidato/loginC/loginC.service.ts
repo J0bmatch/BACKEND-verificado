@@ -53,6 +53,9 @@ export class LoginCService {
     if (dados.telefone) candidato.telefone = dados.telefone;
     if (dados.bio) candidato.bio = dados.bio;
     if (dados.experiencia) candidato.experiencia = dados.experiencia;
+    if (dados.idiomas) candidato.idiomas = dados.idiomas;
+    if (dados.fluencia) candidato.fluencia = dados.fluencia;
+
   
     // Atualizando habilidades
     if (dados.habilidades) {

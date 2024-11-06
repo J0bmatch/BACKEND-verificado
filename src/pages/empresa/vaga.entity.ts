@@ -14,7 +14,7 @@ export class Vaga {
   @Column('text')
   exigencias: string;
 
-  @Column({ length: 30 }) // AUEMNTAISSO EM ALGUM MOMENTO
+  @Column({ length: 500 })
   funcao: string;
 
   @Column('float', { precision: 5 })

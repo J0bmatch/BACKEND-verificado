@@ -17,8 +17,8 @@ import { MostrarEmpresaModule } from './pages/empresa/mostrar-empresa/MostrarEmp
       host: 'localhost',
       port: 3306, 
       username: 'root',
-      password: '',
-      database: 'jobmatch',
+      password: 'aluno',
+      database: 'jobmatchss',
       entities: [__dirname + '/**/*.entity{.ts,.js}'], 
       synchronize: false, //testar BD depois
     }),

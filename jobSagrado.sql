@@ -18,10 +18,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Banco de dados: `jobmatchss`
+-- Banco de dados: `jobmatch`
 --
-CREATE DATABASE IF NOT EXISTS `jobmatchss` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `jobmatchss`;
+CREATE DATABASE IF NOT EXISTS `jobmatch` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `jobmatch`;
 
 -- --------------------------------------------------------
 
@@ -33,8 +33,8 @@ CREATE TABLE `candidato` (
   `id` int(11) NOT NULL,
   `nome` varchar(50) NOT NULL,
   `email` varchar(30) NOT NULL,
-  `idiomas` varchar(15) NOT NULL,
-  `fluencia` varchar(15) NOT NULL,
+  `idiomas` varchar(50) NOT NULL,
+  `fluencia` varchar(50) NOT NULL,
   `nomesocial` varchar(50) NOT NULL,
   `numero` varchar(4) NOT NULL,
   `tipodeficiencia` varchar(50) NOT NULL,
@@ -484,7 +484,7 @@ CREATE TABLE `vaga` (
   `salario` float NOT NULL,
   `riscos` text NOT NULL,
   `empresa_id` int(11) DEFAULT NULL,
-  `funcao` varchar(30) NOT NULL,
+  `funcao` varchar(500) NOT NULL,
   `googleForm` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
