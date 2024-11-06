@@ -9,6 +9,7 @@ import { CadastroEmpresaModule } from './pages/empresa/cadastroE/cadastroempresa
 import { MatchModule } from './pages/ambos/match/match.module';
 import { MostrarCandidatoModule } from './pages/candidato/mostrar-candidato/mostrar-candidato.module';
 import { MostrarEmpresaModule } from './pages/empresa/mostrar-empresa/MostrarEmpresaModule';
+import { ConfirmMatchModule } from './pages/ambos/confirmaMatch/confirmaMatch.module';
 
 @Module({
   imports: [
@@ -18,9 +19,9 @@ import { MostrarEmpresaModule } from './pages/empresa/mostrar-empresa/MostrarEmp
       port: 3306, 
       username: 'root',
       password: 'aluno',
-      database: 'jobmatchss',
+      database: 'jobmatch',
       entities: [__dirname + '/**/*.entity{.ts,.js}'], 
-      synchronize: false, //testar BD depois
+      synchronize: false,
     }),
     LoginCModule,
     LoginEModule,
@@ -29,6 +30,7 @@ import { MostrarEmpresaModule } from './pages/empresa/mostrar-empresa/MostrarEmp
     MatchModule,
     MostrarCandidatoModule,
     MostrarEmpresaModule,
+    ConfirmMatchModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -22,4 +22,15 @@ export class MostrarEmpresaService {
 
     return empresa;
   }
+
+  async getTop10EmpresasByVagas(): Promise<Empresa[]> {
+    // Consulta com Group By e COUNT para buscar as 10 empresas com mais vagas
+    return this.empresaRepository
+      .createQueryBuilder('empresa')
+      .leftJoinAndSelect('empresa.vagas', 'vaga')  // Relaciona com a entidade Vaga
+      .groupBy('empresa.id')  // Agrupa por empresa
+      .orderBy('COUNT(vaga.id)', 'DESC')  // Ordena pelo número de vagas
+      .limit(10)  // Limita o resultado para 10
+      .getMany();
+  }
 }

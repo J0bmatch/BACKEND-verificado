@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 06-Nov-2024 às 02:08
--- Versão do servidor: 10.4.32-MariaDB
--- versão do PHP: 8.2.12
+-- Tempo de geração: 06-Nov-2024 às 22:07
+-- Versão do servidor: 8.0.36
+-- versão do PHP: 7.3.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -30,24 +30,24 @@ USE `jobmatch`;
 --
 
 CREATE TABLE `candidato` (
-  `id` int(11) NOT NULL,
-  `nome` varchar(50) NOT NULL,
-  `email` varchar(30) NOT NULL,
-  `idiomas` varchar(50) NOT NULL,
-  `fluencia` varchar(50) NOT NULL,
-  `nomesocial` varchar(50) NOT NULL,
-  `numero` varchar(4) NOT NULL,
-  `tipodeficiencia` varchar(50) NOT NULL,
-  `graudeficiencia` varchar(50) NOT NULL,
-  `adaptacaodeficiencia` varchar(50) NOT NULL,
-  `bio` varchar(50) NOT NULL,
-  `experiencia` varchar(255) DEFAULT NULL,
-  `telefone` varchar(15) NOT NULL,
-  `dataNascimento` varchar(11) NOT NULL,
-  `rm` varchar(5) NOT NULL,
-  `curso` varchar(20) NOT NULL,
-  `instituicao` varchar(50) NOT NULL,
-  `endereco_id` int(11) DEFAULT NULL
+  `id` int NOT NULL,
+  `nome` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `email` varchar(30) COLLATE utf8mb4_general_ci NOT NULL,
+  `idiomas` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `fluencia` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `nomesocial` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `numero` varchar(4) COLLATE utf8mb4_general_ci NOT NULL,
+  `tipodeficiencia` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `graudeficiencia` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `adaptacaodeficiencia` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `bio` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `experiencia` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `telefone` varchar(15) COLLATE utf8mb4_general_ci NOT NULL,
+  `dataNascimento` varchar(11) COLLATE utf8mb4_general_ci NOT NULL,
+  `rm` varchar(5) COLLATE utf8mb4_general_ci NOT NULL,
+  `curso` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `instituicao` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `endereco_id` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -65,7 +65,7 @@ INSERT INTO `candidato` (`id`, `nome`, `email`, `idiomas`, `fluencia`, `nomesoci
 (8, 'Gabriela Pereira', 'gabriela.pereira@email.com', 'Português', 'Básico', 'Gabriela', '2468', 'Nenhuma', 'Nenhuma', 'Nenhuma', 'Estagiária em administração, buscando experiência ', 'Sem experiência formal, mas com boa formação acadêmica em administração.', '321654987', '1999-05-17', '66778', 'Administração', 'Universidade MNO', 8),
 (9, 'Rodrigo Oliveira', 'rodrigo.oliveira@email.com', 'Português, Ingl', 'Avançado', 'Rodrigo', '9876', 'Nenhuma', 'Nenhuma', 'Nenhuma', 'Experiência de 6 anos como desenvolvedor mobile.', 'Desenvolvimento de aplicativos móveis para diversas plataformas.', '654987321', '1994-11-10', '77889', 'Desenvolvimento de S', 'Faculdade PQR', 9),
 (10, 'Fernanda Silva', 'fernanda.silva@email.com', 'Português', 'Intermediário', 'Fernanda', '8642', 'Deficiência Visual', 'Moderada', 'Necessita de tecnologias assistivas para leitura d', 'Profissional com experiência em consultoria de TI ', 'Atuou em empresas de TI com foco em suporte técnico e infraestrutura.', '159753486', '1995-02-12', '88990', 'Consultoria de TI', 'Universidade STU', 10),
-(11, 'Carlos Silva', '', '', '', '', '', 'Visual', 'Moderada', 'Necessita de software de leitura.', '', NULL, '', '1995-08-15', '12345', 'Tecnologia da Informação', 'Faculdade ABC', NULL),
+(11, 'Carlos Silva', '', '', '', '', '', 'Visual', 'Moderada', 'Necessita de software de leitura.', '', NULL, '', '1995-08-15', '12345', 'Tecnologia da Inform', 'Faculdade ABC', NULL),
 (12, 'Ana Costa', '', '', '', '', '', '', '', '', '', NULL, '', '1994-03-22', '12346', '', '', NULL),
 (13, 'Bruno Santos', '', '', '', '', '', '', '', '', '', NULL, '', '1996-11-10', '12347', 'Engenharia', 'Universidade XYZ', NULL),
 (14, 'Mariana Oliveira', '', '', '', '', '', 'Auditiva', 'Leve', 'Precisa de intérprete de Libras.', '', NULL, '', '1997-07-25', '12348', '', '', NULL),
@@ -75,7 +75,7 @@ INSERT INTO `candidato` (`id`, `nome`, `email`, `idiomas`, `fluencia`, `nomesoci
 (18, 'Juliana Martins', '', '', '', '', '', '', '', '', '', NULL, '', '1996-09-29', '12352', 'Direito', 'Universidade ABC', NULL),
 (19, 'Gabriel Souza', '', '', '', '', '', 'Visual', 'Grave', 'Necessita de documentos em braile.', '', NULL, '', '1994-11-21', '12353', '', '', NULL),
 (20, 'Patricia Rocha', '', '', '', '', '', '', '', '', '', NULL, '', '1993-04-08', '12354', '', '', NULL),
-(21, 'Renato Ferreira', '', '', '', '', '', '', '', '', '', NULL, '', '1995-06-19', '12355', 'Ciências da Computação', 'Faculdade GHI', NULL),
+(21, 'Renato Ferreira', '', '', '', '', '', '', '', '', '', NULL, '', '1995-06-19', '12355', 'Ciências da Computaç', 'Faculdade GHI', NULL),
 (22, 'Larissa Sousa', '', '', '', '', '', 'Motora', 'Moderada', 'Necessita de adaptações ergonômicas.', '', NULL, '', '1997-10-30', '12356', '', '', NULL),
 (23, 'Thiago Pereira', '', '', '', '', '', '', '', '', '', NULL, '', '1996-12-09', '12357', '', '', NULL),
 (24, 'Aline Farias', '', '', '', '', '', '', '', '', '', NULL, '', '1995-04-11', '12358', 'Psicologia', 'Faculdade JKL', NULL),
@@ -92,7 +92,7 @@ INSERT INTO `candidato` (`id`, `nome`, `email`, `idiomas`, `fluencia`, `nomesoci
 (35, 'Fabio Machado', '', '', '', '', '', '', '', '', '', NULL, '', '1996-01-18', '12369', '', '', NULL),
 (36, 'Clarissa Santana', '', '', '', '', '', '', '', '', '', NULL, '', '1994-09-08', '12370', '', '', NULL),
 (37, 'Marcelo Vieira', '', '', '', '', '', '', '', '', '', NULL, '', '1993-12-12', '12371', '', '', NULL),
-(38, 'Alice Teixeira', '', '', '', '', '', '', '', '', '', NULL, '', '1995-07-22', '12372', 'Engenharia de Software', 'Universidade XYZ', NULL),
+(38, 'Alice Teixeira', '', '', '', '', '', '', '', '', '', NULL, '', '1995-07-22', '12372', 'Engenharia de Softwa', 'Universidade XYZ', NULL),
 (39, 'Otávio Cavalcante', '', '', '', '', '', '', '', '', '', NULL, '', '1997-06-15', '12373', '', '', NULL),
 (40, 'Melissa Bezerra', '', '', '', '', '', 'Visual', 'Grave', 'Necessita de documentos acessíveis.', '', NULL, '', '1994-10-02', '12374', '', '', NULL),
 (41, 'Enzo Rezende', '', '', '', '', '', '', '', '', '', NULL, '', '1993-03-30', '12375', 'Física', 'Universidade DEF', NULL),
@@ -113,7 +113,6 @@ INSERT INTO `candidato` (`id`, `nome`, `email`, `idiomas`, `fluencia`, `nomesoci
 (56, 'André Moreira', '', '', '', '', '', '', '', '', '', NULL, '', '1996-02-07', '12390', '', '', NULL),
 (57, 'Rita de Cássia', '', '', '', '', '', '', '', '', '', NULL, '', '1997-05-19', '12391', '', '', NULL);
 
-
 -- --------------------------------------------------------
 
 --
@@ -121,8 +120,8 @@ INSERT INTO `candidato` (`id`, `nome`, `email`, `idiomas`, `fluencia`, `nomesoci
 --
 
 CREATE TABLE `candidato_endereco` (
-  `candidatoId` int(11) NOT NULL,
-  `enderecoEnderecoId` int(11) NOT NULL
+  `candidatoId` int NOT NULL,
+  `enderecoEnderecoId` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -132,8 +131,8 @@ CREATE TABLE `candidato_endereco` (
 --
 
 CREATE TABLE `candidato_habilidades` (
-  `candidatoId` int(11) NOT NULL,
-  `habilidadesId` int(11) NOT NULL
+  `candidatoId` int NOT NULL,
+  `habilidadesId` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -159,10 +158,10 @@ INSERT INTO `candidato_habilidades` (`candidatoId`, `habilidadesId`) VALUES
 --
 
 CREATE TABLE `candidato_id` (
-  `candidatoId` int(11) NOT NULL,
-  `enderecoEnderecoId` int(11) NOT NULL,
-  `habilidadesId` int(11) NOT NULL,
-  `interessesId` int(11) NOT NULL
+  `candidatoId` int NOT NULL,
+  `enderecoEnderecoId` int NOT NULL,
+  `habilidadesId` int NOT NULL,
+  `interessesId` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -172,8 +171,8 @@ CREATE TABLE `candidato_id` (
 --
 
 CREATE TABLE `candidato_interesses` (
-  `candidatoId` int(11) NOT NULL,
-  `interessesId` int(11) NOT NULL
+  `candidatoId` int NOT NULL,
+  `interessesId` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -195,28 +194,48 @@ INSERT INTO `candidato_interesses` (`candidatoId`, `interessesId`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `confirmmatch`
+--
+
+CREATE TABLE `confirmmatch` (
+  `id` int NOT NULL,
+  `vaga_id` int NOT NULL,
+  `candidato_id` int NOT NULL,
+  `iscontratado` tinyint(1) DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Extraindo dados da tabela `confirmmatch`
+--
+
+INSERT INTO `confirmmatch` (`id`, `vaga_id`, `candidato_id`, `iscontratado`) VALUES
+(1, 1, 2, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `empresa`
 --
 
 CREATE TABLE `empresa` (
-  `id` int(11) NOT NULL,
-  `descricao` text NOT NULL,
-  `segmentoatuacao_id` int(11) DEFAULT NULL,
-  `cnpj` varchar(255) NOT NULL,
-  `telefone` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `fotoperfil` varchar(255) NOT NULL,
-  `nomeUltilizador` varchar(255) NOT NULL,
-  `senha` varchar(255) NOT NULL,
-  `nomeEmpresa` varchar(255) NOT NULL,
-  `numero` varchar(255) NOT NULL,
-  `complemento` varchar(255) NOT NULL,
-  `cep` varchar(9) NOT NULL,
-  `rua` varchar(50) NOT NULL,
-  `bairro` varchar(50) NOT NULL,
-  `cidade` varchar(50) NOT NULL,
-  `estado` varchar(50) NOT NULL,
-  `pais` varchar(50) NOT NULL
+  `id` int NOT NULL,
+  `descricao` text COLLATE utf8mb4_general_ci NOT NULL,
+  `segmentoatuacao_id` int DEFAULT NULL,
+  `cnpj` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `telefone` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `fotoperfil` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `nomeUltilizador` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `senha` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `nomeEmpresa` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `numero` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `complemento` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `cep` varchar(9) COLLATE utf8mb4_general_ci NOT NULL,
+  `rua` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `bairro` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `cidade` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `estado` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `pais` varchar(50) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -242,12 +261,12 @@ INSERT INTO `empresa` (`id`, `descricao`, `segmentoatuacao_id`, `cnpj`, `telefon
 --
 
 CREATE TABLE `endereco` (
-  `endereco_id` int(11) NOT NULL,
-  `cep` varchar(9) NOT NULL,
-  `rua` varchar(20) NOT NULL,
-  `bairro` varchar(20) NOT NULL,
-  `cidade` varchar(20) NOT NULL,
-  `estado` varchar(2) NOT NULL
+  `endereco_id` int NOT NULL,
+  `cep` varchar(9) COLLATE utf8mb4_general_ci NOT NULL,
+  `rua` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `bairro` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `cidade` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `estado` varchar(2) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -273,11 +292,11 @@ INSERT INTO `endereco` (`endereco_id`, `cep`, `rua`, `bairro`, `cidade`, `estado
 --
 
 CREATE TABLE `formacaoacademica` (
-  `id` int(11) NOT NULL,
-  `curso` varchar(20) DEFAULT NULL,
-  `instituicao` varchar(50) DEFAULT NULL,
-  `cidade` varchar(20) DEFAULT NULL,
-  `estado` varchar(2) DEFAULT NULL
+  `id` int NOT NULL,
+  `curso` varchar(20) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `instituicao` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `cidade` varchar(20) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `estado` varchar(2) COLLATE utf8mb4_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -287,11 +306,11 @@ CREATE TABLE `formacaoacademica` (
 --
 
 CREATE TABLE `formacao_academica` (
-  `id` int(11) NOT NULL,
-  `curso` varchar(20) NOT NULL,
-  `instituicao` varchar(50) NOT NULL,
-  `cidade` varchar(20) NOT NULL,
-  `estado` varchar(2) NOT NULL
+  `id` int NOT NULL,
+  `curso` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `instituicao` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `cidade` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `estado` varchar(2) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -301,9 +320,9 @@ CREATE TABLE `formacao_academica` (
 --
 
 CREATE TABLE `habilidades` (
-  `id` int(11) NOT NULL,
-  `tipo` varchar(50) NOT NULL,
-  `descricao` varchar(50) NOT NULL
+  `id` int NOT NULL,
+  `tipo` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `descricao` varchar(50) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -376,9 +395,9 @@ INSERT INTO `habilidades` (`id`, `tipo`, `descricao`) VALUES
 --
 
 CREATE TABLE `interesses` (
-  `id` int(11) NOT NULL,
-  `descricao` varchar(50) NOT NULL,
-  `tipo` varchar(50) NOT NULL
+  `id` int NOT NULL,
+  `descricao` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `tipo` varchar(50) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -447,9 +466,9 @@ INSERT INTO `interesses` (`id`, `descricao`, `tipo`) VALUES
 --
 
 CREATE TABLE `segmentoatuacao` (
-  `id` int(11) NOT NULL,
-  `descricao` text NOT NULL,
-  `setor` varchar(15) NOT NULL
+  `id` int NOT NULL,
+  `descricao` text COLLATE utf8mb4_general_ci NOT NULL,
+  `setor` varchar(15) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -475,14 +494,14 @@ INSERT INTO `segmentoatuacao` (`id`, `descricao`, `setor`) VALUES
 --
 
 CREATE TABLE `vaga` (
-  `id` int(11) NOT NULL,
-  `descricao` text NOT NULL,
-  `exigencias` text NOT NULL,
+  `id` int NOT NULL,
+  `descricao` text COLLATE utf8mb4_general_ci NOT NULL,
+  `exigencias` text COLLATE utf8mb4_general_ci NOT NULL,
   `salario` float NOT NULL,
-  `riscos` text NOT NULL,
-  `empresa_id` int(11) DEFAULT NULL,
-  `funcao` varchar(500) NOT NULL,
-  `googleForm` text NOT NULL
+  `riscos` text COLLATE utf8mb4_general_ci NOT NULL,
+  `empresa_id` int DEFAULT NULL,
+  `funcao` varchar(500) COLLATE utf8mb4_general_ci NOT NULL,
+  `googleForm` text COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -508,8 +527,8 @@ INSERT INTO `vaga` (`id`, `descricao`, `exigencias`, `salario`, `riscos`, `empre
 --
 
 CREATE TABLE `vaga_habilidades` (
-  `vaga_id` int(11) NOT NULL,
-  `habilidades_id` int(11) NOT NULL
+  `vaga_id` int NOT NULL,
+  `habilidades_id` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -535,8 +554,8 @@ INSERT INTO `vaga_habilidades` (`vaga_id`, `habilidades_id`) VALUES
 --
 
 CREATE TABLE `vaga_interesses` (
-  `vaga_id` int(11) NOT NULL,
-  `interesses_id` int(11) NOT NULL
+  `vaga_id` int NOT NULL,
+  `interesses_id` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -599,6 +618,14 @@ ALTER TABLE `candidato_interesses`
   ADD PRIMARY KEY (`candidatoId`,`interessesId`),
   ADD KEY `IDX_41bf39b22738e2be065dd805c4` (`candidatoId`),
   ADD KEY `IDX_6116b19138c66c034df5358a56` (`interessesId`);
+
+--
+-- Índices para tabela `confirmmatch`
+--
+ALTER TABLE `confirmmatch`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `vaga_id` (`vaga_id`),
+  ADD KEY `candidato_id` (`candidato_id`);
 
 --
 -- Índices para tabela `empresa`
@@ -674,55 +701,61 @@ ALTER TABLE `vaga_interesses`
 -- AUTO_INCREMENT de tabela `candidato`
 --
 ALTER TABLE `candidato`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+
+--
+-- AUTO_INCREMENT de tabela `confirmmatch`
+--
+ALTER TABLE `confirmmatch`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `empresa`
 --
 ALTER TABLE `empresa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de tabela `endereco`
 --
 ALTER TABLE `endereco`
-  MODIFY `endereco_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `endereco_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de tabela `formacaoacademica`
 --
 ALTER TABLE `formacaoacademica`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `formacao_academica`
 --
 ALTER TABLE `formacao_academica`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `habilidades`
 --
 ALTER TABLE `habilidades`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT de tabela `interesses`
 --
 ALTER TABLE `interesses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT de tabela `segmentoatuacao`
 --
 ALTER TABLE `segmentoatuacao`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de tabela `vaga`
 --
 ALTER TABLE `vaga`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Restrições para despejos de tabelas
@@ -756,6 +789,13 @@ ALTER TABLE `candidato_id`
 ALTER TABLE `candidato_interesses`
   ADD CONSTRAINT `FK_41bf39b22738e2be065dd805c47` FOREIGN KEY (`candidatoId`) REFERENCES `candidato` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_6116b19138c66c034df5358a564` FOREIGN KEY (`interessesId`) REFERENCES `interesses` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Limitadores para a tabela `confirmmatch`
+--
+ALTER TABLE `confirmmatch`
+  ADD CONSTRAINT `confirmmatch_ibfk_1` FOREIGN KEY (`vaga_id`) REFERENCES `vaga` (`id`),
+  ADD CONSTRAINT `confirmmatch_ibfk_2` FOREIGN KEY (`candidato_id`) REFERENCES `candidato` (`id`);
 
 --
 -- Limitadores para a tabela `empresa`
