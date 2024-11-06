@@ -4,7 +4,8 @@ node.js ([use o instalador de pacote](https://nodejs-org.translate.goog/en?_x_tr
 ## Instalações no terminal (em ordem):
 npm install
 npm install @nestjs/typeorm typeorm mysql2
-npm install class-validator class-transformer
+
+
 
 
 
