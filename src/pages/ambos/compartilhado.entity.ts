@@ -1,8 +1,9 @@
 // src/pages/ambos/entities.ts
 //tabelas de: endereço, habilidades e interesses
 import { Vaga } from '../empresa/vaga.entity';
+import { Candidato } from '../candidato/candidato.entity';
 
-import { Entity, Column, PrimaryGeneratedColumn, ManyToMany } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable } from 'typeorm';
 
 @Entity('endereco')
 export class Endereco {
@@ -23,6 +24,10 @@ export class Endereco {
 
   @Column({ length: 2 })
   estado: string;
+
+  @ManyToMany(() => Candidato)
+  @JoinTable({ name: 'candidato_id' })  // Define o relacionamento com a tabela endereco
+  candidato: Candidato;
 }
 
 @Entity('habilidades')
@@ -35,6 +40,10 @@ export class Habilidades {
 
   @Column({ length: 20 })
   tipo: string;
+
+  @ManyToMany(() => Candidato)
+  @JoinTable({ name: 'candidato_id' })
+  candidato: Candidato;
 
   @ManyToMany(() => Vaga, vaga => vaga.habilidades) // Relação inversa com Vaga
   vagas: Vaga[];
@@ -51,6 +60,10 @@ export class Interesses {
 
   @Column({ length: 20 })
   tipo: string;
+
+  @ManyToMany(() => Candidato)
+  @JoinTable({ name: 'candidato_id' })
+  candidato: Candidato;
 
   @ManyToMany(() => Vaga, vaga => vaga.interesses) // Relação inversa com Vaga
   vagas: Vaga[];

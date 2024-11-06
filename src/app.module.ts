@@ -6,7 +6,9 @@ import { LoginCModule } from './pages/candidato/loginC/loginC.module';
 import { LoginEModule } from './pages/empresa/loginE/loginE.module';
 import { VagaModule } from './pages/empresa/vaga/vaga.module'
 import { CadastroEmpresaModule } from './pages/empresa/cadastroE/cadastroempresa.module';
-//import { MatchModule } from './pages/ambos/match/match.module';
+import { MatchModule } from './pages/ambos/match/match.module';
+import { MostrarCandidatoModule } from './pages/candidato/mostrar-candidato/mostrar-candidato.module';
+import { MostrarEmpresaModule } from './pages/empresa/mostrar-empresa/MostrarEmpresaModule';
 
 @Module({
   imports: [
@@ -18,13 +20,15 @@ import { CadastroEmpresaModule } from './pages/empresa/cadastroE/cadastroempresa
       password: '',
       database: 'jobmatch',
       entities: [__dirname + '/**/*.entity{.ts,.js}'], 
-      synchronize: true, //testar BD depois
+      synchronize: false, //testar BD depois
     }),
     LoginCModule,
     LoginEModule,
     VagaModule,
     CadastroEmpresaModule,
-    //MatchModule,
+    MatchModule,
+    MostrarCandidatoModule,
+    MostrarEmpresaModule,
   ],
   controllers: [AppController],
   providers: [AppService],

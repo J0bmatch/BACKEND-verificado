@@ -1,5 +1,5 @@
 import { Habilidades, Interesses, Endereco } from '../ambos/compartilhado.entity';
-import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, OneToMany } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, OneToMany, JoinTable, ManyToMany } from 'typeorm';
 
 @Entity('candidato')
 export class Candidato {
@@ -36,12 +36,6 @@ export class Candidato {
   @Column({ length: 50 })
   instituicao: string;
 
-  @Column({ length: 20 })
-  cidade: string;
-
-  @Column({ length: 2 })
-  estado: string;
-//
   @Column({ length: 50 })
   nomesocial: string;
 
@@ -64,13 +58,13 @@ export class Candidato {
   @Column({ length: 50 })
   adaptacaodeficiencia: string;
 
-  @OneToOne(() => Interesses)
-  @JoinColumn({ name: 'interesses_id' })
-  interesses: Interesses;
+  @ManyToMany(() => Interesses)
+  @JoinTable({ name: 'candidato_interesses' })
+  interesses: Interesses[];
 
-  @OneToOne(() => Habilidades)
-  @JoinColumn({ name: 'habilidades_id' })
-  habilidades: Habilidades;
+  @ManyToMany(() => Habilidades)
+  @JoinTable({ name: 'candidato_habilidades' }) // Nome da tabela de junção
+  habilidades: Habilidades[];
 
   @OneToOne(() => Endereco)
   @JoinColumn({ name: 'endereco_id' })  // Define o relacionamento com a tabela endereco

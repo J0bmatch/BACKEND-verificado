@@ -16,20 +16,25 @@ export class LoginCController {
   }
 
   // Rota para atualizar cadastro do candidato
-  @Post('atualizar')
+  @Post('atualizar/:rm')
   async atualizarCadastro(
-    @Body('rm') rm: string,
+    @Param('rm') rm: string,
     @Body() dados: Partial<Candidato>,
   ) {
     return this.loginCService.atualizarCadastro(rm, dados);
   }
-  @Get('candidato/:rm')
-async buscarCandidato(@Param('rm') rm: string) {
-  console.log('Buscando candidato com RM:', rm);
-  const candidato = await this.loginCService.buscarCandidatoPorRm(rm);
-  if (!candidato) {
-    throw new NotFoundException('Candidato não encontrado');
+
+
+ @Get('candidato/:rm')
+  async buscarCandidato(@Param('rm') rm: string) {
+    console.log('Buscando candidato com RM:', rm);
+    const candidato = await this.loginCService.buscarCandidatoPorRm(rm);
+    
+    if (!candidato) {
+      throw new NotFoundException('Candidato não encontrado');
+    }
+
+    // Retorna o candidato encontrado com suas habilidades e interesses
+    return candidato;
   }
-  return candidato;
-}
 }

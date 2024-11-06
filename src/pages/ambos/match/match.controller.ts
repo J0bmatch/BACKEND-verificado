@@ -1,13 +1,13 @@
-/*import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { MatchService } from './match.service';
+import { Vaga } from '../../empresa/vaga.entity';
 
 @Controller('match')
 export class MatchController {
   constructor(private readonly matchService: MatchService) {}
 
-  @Get('candidato/:id')
-  async findBestMatches(@Param('id') id: string) {
-    const candidatoId = parseInt(id, 10); // Convertendo id para número
-    return this.matchService.findBestMatchesForCandidato(candidatoId);
+  @Get(':candidatoId')
+  async getMatchingVagas(@Param('candidatoId') candidatoId: number): Promise<Vaga[]> {
+    return this.matchService.findMatchingVagas(candidatoId);
   }
-}*/
+}

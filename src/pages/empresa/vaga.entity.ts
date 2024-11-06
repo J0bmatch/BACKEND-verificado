@@ -14,7 +14,7 @@ export class Vaga {
   @Column('text')
   exigencias: string;
 
-  @Column({ length: 30 }) // Define o tamanho máximo para o campo 'funcao'
+  @Column({ length: 30 }) // AUEMNTAISSO EM ALGUM MOMENTO
   funcao: string;
 
   @Column('float', { precision: 5 })
