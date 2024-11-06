@@ -17,9 +17,12 @@ const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
 const candidato_entity_1 = require("../candidato.entity");
+const compartilhado_entity_1 = require("../../ambos/compartilhado.entity");
 let LoginCService = class LoginCService {
-    constructor(candidatoRepository) {
+    constructor(candidatoRepository, habilidadesRepository, interessesRepository) {
         this.candidatoRepository = candidatoRepository;
+        this.habilidadesRepository = habilidadesRepository;
+        this.interessesRepository = interessesRepository;
     }
     async verificarLogin(rm, dataNascimento) {
         const candidato = await this.candidatoRepository.findOne({
@@ -30,28 +33,56 @@ let LoginCService = class LoginCService {
         }
         const primeiroAcesso = !candidato.bio;
         if (primeiroAcesso) {
-            return { mensagem: 'Primeiro acesso', };
+            return { mensagem: 'Primeiro acesso' };
         }
         else {
-            return { mensagem: 'Acesso já realizado anteriormente', };
+            return { mensagem: 'Acesso já realizado anteriormente' };
         }
     }
     async atualizarCadastro(rm, dados) {
-        const candidato = await this.candidatoRepository.findOne({ where: { rm } });
+        const candidato = await this.candidatoRepository.findOne({
+            where: { rm },
+            relations: ['habilidades', 'interesses'],
+        });
         if (!candidato) {
-            return { mensagem: 'Candidato não encontrado.' };
+            throw new common_1.NotFoundException('Candidato não encontrado.');
         }
-        await this.candidatoRepository.update(candidato.id, dados);
+        if (dados.nome)
+            candidato.nome = dados.nome;
+        if (dados.email)
+            candidato.email = dados.email;
+        if (dados.telefone)
+            candidato.telefone = dados.telefone;
+        if (dados.bio)
+            candidato.bio = dados.bio;
+        if (dados.experiencia)
+            candidato.experiencia = dados.experiencia;
+        if (dados.habilidades) {
+            const habilidades = await this.habilidadesRepository.findByIds(dados.habilidades);
+            candidato.habilidades = habilidades;
+        }
+        if (dados.interesses) {
+            const interesses = await this.interessesRepository.findByIds(dados.interesses);
+            candidato.interesses = interesses;
+        }
+        await this.candidatoRepository.save(candidato);
         return { mensagem: 'Dados atualizados com sucesso.' };
     }
     async buscarCandidatoPorRm(rm) {
-        return this.candidatoRepository.findOne({ where: { rm } });
+        return this.candidatoRepository.findOne({
+            where: { rm },
+            relations: ['habilidades', 'interesses'],
+        });
     }
 };
 exports.LoginCService = LoginCService;
 exports.LoginCService = LoginCService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(candidato_entity_1.Candidato)),
-    __metadata("design:paramtypes", [typeorm_2.Repository])
+    __param(1, (0, typeorm_1.InjectRepository)(compartilhado_entity_1.Habilidades)),
+    __param(2, (0, typeorm_1.InjectRepository)(compartilhado_entity_1.Interesses)),
+    __metadata("design:paramtypes", [typeorm_2.Repository,
+        typeorm_2.Repository,
+        typeorm_2.Repository])
 ], LoginCService);
 //# sourceMappingURL=loginC.service.js.map

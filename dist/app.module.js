@@ -15,6 +15,9 @@ const loginC_module_1 = require("./pages/candidato/loginC/loginC.module");
 const loginE_module_1 = require("./pages/empresa/loginE/loginE.module");
 const vaga_module_1 = require("./pages/empresa/vaga/vaga.module");
 const cadastroempresa_module_1 = require("./pages/empresa/cadastroE/cadastroempresa.module");
+const match_module_1 = require("./pages/ambos/match/match.module");
+const mostrar_candidato_module_1 = require("./pages/candidato/mostrar-candidato/mostrar-candidato.module");
+const MostrarEmpresaModule_1 = require("./pages/empresa/mostrar-empresa/MostrarEmpresaModule");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -29,12 +32,15 @@ exports.AppModule = AppModule = __decorate([
                 password: '',
                 database: 'jobmatch',
                 entities: [__dirname + '/**/*.entity{.ts,.js}'],
-                synchronize: true,
+                synchronize: false,
             }),
             loginC_module_1.LoginCModule,
             loginE_module_1.LoginEModule,
             vaga_module_1.VagaModule,
             cadastroempresa_module_1.CadastroEmpresaModule,
+            match_module_1.MatchModule,
+            mostrar_candidato_module_1.MostrarCandidatoModule,
+            MostrarEmpresaModule_1.MostrarEmpresaModule,
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],

@@ -12,12 +12,13 @@ const typeorm_1 = require("@nestjs/typeorm");
 const loginC_service_1 = require("./loginC.service");
 const loginC_controller_1 = require("./loginC.controller");
 const candidato_entity_1 = require("../candidato.entity");
+const compartilhado_entity_1 = require("../../ambos/compartilhado.entity");
 let LoginCModule = class LoginCModule {
 };
 exports.LoginCModule = LoginCModule;
 exports.LoginCModule = LoginCModule = __decorate([
     (0, common_1.Module)({
-        imports: [typeorm_1.TypeOrmModule.forFeature([candidato_entity_1.Candidato])],
+        imports: [typeorm_1.TypeOrmModule.forFeature([candidato_entity_1.Candidato, compartilhado_entity_1.Habilidades, compartilhado_entity_1.Interesses])],
         controllers: [loginC_controller_1.LoginCController],
         providers: [loginC_service_1.LoginCService],
     })

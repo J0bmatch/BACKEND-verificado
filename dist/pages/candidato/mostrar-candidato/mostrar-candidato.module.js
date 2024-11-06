@@ -6,21 +6,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MatchModule = void 0;
+exports.MostrarCandidatoModule = void 0;
 const common_1 = require("@nestjs/common");
-const match_service_1 = require("./match.service");
-const match_controller_1 = require("./match.controller");
 const typeorm_1 = require("@nestjs/typeorm");
-const vaga_entity_1 = require("../../empresa/vaga.entity");
-const candidato_entity_1 = require("../../candidato/candidato.entity");
-let MatchModule = class MatchModule {
+const mostrar_candidato_service_1 = require("./mostrar-candidato.service");
+const mostrar_candidato_controller_1 = require("./mostrar-candidato.controller");
+const candidato_entity_1 = require("../candidato.entity");
+let MostrarCandidatoModule = class MostrarCandidatoModule {
 };
-exports.MatchModule = MatchModule;
-exports.MatchModule = MatchModule = __decorate([
+exports.MostrarCandidatoModule = MostrarCandidatoModule;
+exports.MostrarCandidatoModule = MostrarCandidatoModule = __decorate([
     (0, common_1.Module)({
-        imports: [typeorm_1.TypeOrmModule.forFeature([vaga_entity_1.Vaga, candidato_entity_1.Candidato])],
-        controllers: [match_controller_1.MatchController],
-        providers: [match_service_1.MatchService],
+        imports: [typeorm_1.TypeOrmModule.forFeature([candidato_entity_1.Candidato])],
+        controllers: [mostrar_candidato_controller_1.MostrarCandidatoController],
+        providers: [mostrar_candidato_service_1.MostrarCandidatoService],
     })
-], MatchModule);
-//# sourceMappingURL=match.module.js.map
+], MostrarCandidatoModule);
+//# sourceMappingURL=mostrar-candidato.module.js.map

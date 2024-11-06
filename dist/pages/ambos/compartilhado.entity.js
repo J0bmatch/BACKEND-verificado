@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Interesses = exports.Habilidades = exports.Endereco = void 0;
 const vaga_entity_1 = require("../empresa/vaga.entity");
+const candidato_entity_1 = require("../candidato/candidato.entity");
 const typeorm_1 = require("typeorm");
 let Endereco = class Endereco {
 };
@@ -39,6 +40,11 @@ __decorate([
     (0, typeorm_1.Column)({ length: 2 }),
     __metadata("design:type", String)
 ], Endereco.prototype, "estado", void 0);
+__decorate([
+    (0, typeorm_1.ManyToMany)(() => candidato_entity_1.Candidato),
+    (0, typeorm_1.JoinTable)({ name: 'candidato_id' }),
+    __metadata("design:type", candidato_entity_1.Candidato)
+], Endereco.prototype, "candidato", void 0);
 exports.Endereco = Endereco = __decorate([
     (0, typeorm_1.Entity)('endereco')
 ], Endereco);
@@ -57,6 +63,11 @@ __decorate([
     (0, typeorm_1.Column)({ length: 20 }),
     __metadata("design:type", String)
 ], Habilidades.prototype, "tipo", void 0);
+__decorate([
+    (0, typeorm_1.ManyToMany)(() => candidato_entity_1.Candidato),
+    (0, typeorm_1.JoinTable)({ name: 'candidato_id' }),
+    __metadata("design:type", candidato_entity_1.Candidato)
+], Habilidades.prototype, "candidato", void 0);
 __decorate([
     (0, typeorm_1.ManyToMany)(() => vaga_entity_1.Vaga, vaga => vaga.habilidades),
     __metadata("design:type", Array)
@@ -79,6 +90,11 @@ __decorate([
     (0, typeorm_1.Column)({ length: 20 }),
     __metadata("design:type", String)
 ], Interesses.prototype, "tipo", void 0);
+__decorate([
+    (0, typeorm_1.ManyToMany)(() => candidato_entity_1.Candidato),
+    (0, typeorm_1.JoinTable)({ name: 'candidato_id' }),
+    __metadata("design:type", candidato_entity_1.Candidato)
+], Interesses.prototype, "candidato", void 0);
 __decorate([
     (0, typeorm_1.ManyToMany)(() => vaga_entity_1.Vaga, vaga => vaga.interesses),
     __metadata("design:type", Array)

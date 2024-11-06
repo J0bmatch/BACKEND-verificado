@@ -12,27 +12,27 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MatchController = void 0;
+exports.MostrarCandidatoController = void 0;
 const common_1 = require("@nestjs/common");
-const match_service_1 = require("./match.service");
-let MatchController = class MatchController {
-    constructor(matchService) {
-        this.matchService = matchService;
+const mostrar_candidato_service_1 = require("./mostrar-candidato.service");
+let MostrarCandidatoController = class MostrarCandidatoController {
+    constructor(mostrarCandidatoService) {
+        this.mostrarCandidatoService = mostrarCandidatoService;
     }
-    async getMatchingVagas(candidatoId) {
-        return this.matchService.findMatchingVagas(candidatoId);
+    async mostrar(id) {
+        return await this.mostrarCandidatoService.mostrar(id);
     }
 };
-exports.MatchController = MatchController;
+exports.MostrarCandidatoController = MostrarCandidatoController;
 __decorate([
-    (0, common_1.Get)(':candidatoId'),
-    __param(0, (0, common_1.Param)('candidatoId')),
+    (0, common_1.Get)(':id'),
+    __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
-], MatchController.prototype, "getMatchingVagas", null);
-exports.MatchController = MatchController = __decorate([
-    (0, common_1.Controller)('match'),
-    __metadata("design:paramtypes", [match_service_1.MatchService])
-], MatchController);
-//# sourceMappingURL=match.controller.js.map
+], MostrarCandidatoController.prototype, "mostrar", null);
+exports.MostrarCandidatoController = MostrarCandidatoController = __decorate([
+    (0, common_1.Controller)('mostrar-candidato'),
+    __metadata("design:paramtypes", [mostrar_candidato_service_1.MostrarCandidatoService])
+], MostrarCandidatoController);
+//# sourceMappingURL=mostrar-candidato.controller.js.map

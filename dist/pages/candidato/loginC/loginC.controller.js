@@ -44,8 +44,8 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], LoginCController.prototype, "verificarLogin", null);
 __decorate([
-    (0, common_1.Post)('atualizar'),
-    __param(0, (0, common_1.Body)('rm')),
+    (0, common_1.Post)('atualizar/:rm'),
+    __param(0, (0, common_1.Param)('rm')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String, Object]),

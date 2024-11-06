@@ -11,8 +11,6 @@ export declare class Candidato {
     experiencia: string;
     curso: string;
     instituicao: string;
-    cidade: string;
-    estado: string;
     nomesocial: string;
     numero: string;
     dataNascimento: string;
@@ -20,7 +18,7 @@ export declare class Candidato {
     tipodeficiencia: string;
     graudeficiencia: string;
     adaptacaodeficiencia: string;
-    interesses: Interesses;
-    habilidades: Habilidades;
+    interesses: Interesses[];
+    habilidades: Habilidades[];
     endereco: Endereco;
 }

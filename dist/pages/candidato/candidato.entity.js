@@ -59,14 +59,6 @@ __decorate([
     __metadata("design:type", String)
 ], Candidato.prototype, "instituicao", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ length: 20 }),
-    __metadata("design:type", String)
-], Candidato.prototype, "cidade", void 0);
-__decorate([
-    (0, typeorm_1.Column)({ length: 2 }),
-    __metadata("design:type", String)
-], Candidato.prototype, "estado", void 0);
-__decorate([
     (0, typeorm_1.Column)({ length: 50 }),
     __metadata("design:type", String)
 ], Candidato.prototype, "nomesocial", void 0);
@@ -95,14 +87,14 @@ __decorate([
     __metadata("design:type", String)
 ], Candidato.prototype, "adaptacaodeficiencia", void 0);
 __decorate([
-    (0, typeorm_1.OneToOne)(() => compartilhado_entity_1.Interesses),
-    (0, typeorm_1.JoinColumn)({ name: 'interesses_id' }),
-    __metadata("design:type", compartilhado_entity_1.Interesses)
+    (0, typeorm_1.ManyToMany)(() => compartilhado_entity_1.Interesses),
+    (0, typeorm_1.JoinTable)({ name: 'candidato_interesses' }),
+    __metadata("design:type", Array)
 ], Candidato.prototype, "interesses", void 0);
 __decorate([
-    (0, typeorm_1.OneToOne)(() => compartilhado_entity_1.Habilidades),
-    (0, typeorm_1.JoinColumn)({ name: 'habilidades_id' }),
-    __metadata("design:type", compartilhado_entity_1.Habilidades)
+    (0, typeorm_1.ManyToMany)(() => compartilhado_entity_1.Habilidades),
+    (0, typeorm_1.JoinTable)({ name: 'candidato_habilidades' }),
+    __metadata("design:type", Array)
 ], Candidato.prototype, "habilidades", void 0);
 __decorate([
     (0, typeorm_1.OneToOne)(() => compartilhado_entity_1.Endereco),

@@ -12,27 +12,30 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MatchController = void 0;
+exports.MostrarEmpresaService = void 0;
 const common_1 = require("@nestjs/common");
-const match_service_1 = require("./match.service");
-let MatchController = class MatchController {
-    constructor(matchService) {
-        this.matchService = matchService;
+const typeorm_1 = require("@nestjs/typeorm");
+const typeorm_2 = require("typeorm");
+const empresa_entity_1 = require("../empresa.entity");
+let MostrarEmpresaService = class MostrarEmpresaService {
+    constructor(empresaRepository) {
+        this.empresaRepository = empresaRepository;
     }
-    async getMatchingVagas(candidatoId) {
-        return this.matchService.findMatchingVagas(candidatoId);
+    async mostrar(id) {
+        const empresa = await this.empresaRepository.findOne({
+            where: { id },
+            relations: ['segmentoAtuacao'],
+        });
+        if (!empresa) {
+            throw new common_1.NotFoundException(`Empresa com ID ${id} não encontrada`);
+        }
+        return empresa;
     }
 };
-exports.MatchController = MatchController;
-__decorate([
-    (0, common_1.Get)(':candidatoId'),
-    __param(0, (0, common_1.Param)('candidatoId')),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number]),
-    __metadata("design:returntype", Promise)
-], MatchController.prototype, "getMatchingVagas", null);
-exports.MatchController = MatchController = __decorate([
-    (0, common_1.Controller)('match'),
-    __metadata("design:paramtypes", [match_service_1.MatchService])
-], MatchController);
-//# sourceMappingURL=match.controller.js.map
+exports.MostrarEmpresaService = MostrarEmpresaService;
+exports.MostrarEmpresaService = MostrarEmpresaService = __decorate([
+    (0, common_1.Injectable)(),
+    __param(0, (0, typeorm_1.InjectRepository)(empresa_entity_1.Empresa)),
+    __metadata("design:paramtypes", [typeorm_2.Repository])
+], MostrarEmpresaService);
+//# sourceMappingURL=MostrarEmpresaService.js.map
