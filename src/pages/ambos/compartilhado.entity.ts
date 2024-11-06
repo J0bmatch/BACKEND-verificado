@@ -35,10 +35,10 @@ export class Habilidades {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ length: 20 })
+  @Column({ length: 50 })
   descricao: string;
 
-  @Column({ length: 20 })
+  @Column({ length: 50 })
   tipo: string;
 
   @ManyToMany(() => Candidato)
@@ -55,10 +55,10 @@ export class Interesses {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ length: 20 })
+  @Column({ length: 50 })
   descricao: string;
 
-  @Column({ length: 20 })
+  @Column({ length: 50 })
   tipo: string;
 
   @ManyToMany(() => Candidato)
