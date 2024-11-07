@@ -29,7 +29,22 @@ export class Candidato {
 
   @Column({ nullable: true })
   experiencia: string;
-//
+  
+  @Column({ length: 9 })
+  cep: string;
+
+  @Column({ length: 20 })
+  rua: string;
+
+  @Column({ length: 20 })
+  bairro: string;
+
+  @Column({ length: 20 })
+  cidade: string;
+
+  @Column({ length: 2 })
+  estado: string;
+
   @Column({ length: 20 })
   curso: string;
 
@@ -67,7 +82,8 @@ export class Candidato {
   habilidades: Habilidades[];
 
   @OneToOne(() => Endereco)
-  @JoinColumn({ name: 'endereco_id' })  // Define o relacionamento com a tabela endereco
-  endereco: Endereco;
+@JoinColumn({ name: 'endereco_id' }) // A coluna que vai armazenar o ID do endereço
+endereco: Endereco;
+
   
 }

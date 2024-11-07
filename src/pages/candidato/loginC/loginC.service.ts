@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Candidato } from '../candidato.entity';
-import { Habilidades, Interesses} from '../../ambos/compartilhado.entity'; // Importe a entidade Habilidades
+import { Habilidades, Interesses, Endereco} from '../../ambos/compartilhado.entity'; // Importe a entidade Habilidades
 
 @Injectable()
 export class LoginCService {
@@ -15,6 +15,9 @@ export class LoginCService {
 
     @InjectRepository(Interesses)  // Injeção do repositório de Habilidades
     private readonly interessesRepository: Repository<Interesses>,
+
+    @InjectRepository(Endereco)
+    private readonly enderecoRepository: Repository<Endereco>,
   ) {}
 
 
@@ -47,7 +50,7 @@ export class LoginCService {
       throw new NotFoundException('Candidato não encontrado.');
     }
   
-    // Atualizando apenas os campos que vieram nos dados
+    // Atualizando os dados do candidato
     if (dados.nome) candidato.nome = dados.nome;
     if (dados.email) candidato.email = dados.email;
     if (dados.telefone) candidato.telefone = dados.telefone;
@@ -55,25 +58,33 @@ export class LoginCService {
     if (dados.experiencia) candidato.experiencia = dados.experiencia;
     if (dados.idiomas) candidato.idiomas = dados.idiomas;
     if (dados.fluencia) candidato.fluencia = dados.fluencia;
-
   
     // Atualizando habilidades
     if (dados.habilidades) {
       const habilidades = await this.habilidadesRepository.findByIds(dados.habilidades);
-      candidato.habilidades = habilidades; // Atualiza a relação ManyToMany
+      candidato.habilidades = habilidades;
     }
   
     // Atualizando interesses
     if (dados.interesses) {
       const interesses = await this.interessesRepository.findByIds(dados.interesses);
-      candidato.interesses = interesses; // Atualiza a relação ManyToMany
+      candidato.interesses = interesses;
     }
+  
+    // Atualizando o endereço (se enviado)
+    if (dados.cep) candidato.cep = dados.cep;
+    if (dados.rua) candidato.rua = dados.rua;
+    if (dados.bairro) candidato.bairro = dados.bairro;
+    if (dados.cidade) candidato.cidade = dados.cidade;
+    if (dados.estado) candidato.estado = dados.estado;
   
     // Salvar as alterações no banco
     await this.candidatoRepository.save(candidato);
   
     return { mensagem: 'Dados atualizados com sucesso.' };
   }
+  
+  
 
   async buscarCandidatoPorRm(rm: string): Promise<Candidato> {
   // Busca do candidato com as relações de habilidades e interesses

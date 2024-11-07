@@ -3,7 +3,7 @@
 import { Vaga } from '../empresa/vaga.entity';
 import { Candidato } from '../candidato/candidato.entity';
 
-import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable } from 'typeorm';
+import { Entity, Column, JoinColumn, OneToOne, PrimaryGeneratedColumn, ManyToMany, JoinTable } from 'typeorm';
 
 @Entity('endereco')
 export class Endereco {
@@ -15,7 +15,7 @@ export class Endereco {
 
   @Column({ length: 20 })
   rua: string;
-
+  
   @Column({ length: 20 })
   bairro: string;
 
@@ -25,9 +25,9 @@ export class Endereco {
   @Column({ length: 2 })
   estado: string;
 
-  @ManyToMany(() => Candidato)
-  @JoinTable({ name: 'candidato_id' })  // Define o relacionamento com a tabela endereco
-  candidato: Candidato;
+  @OneToOne(() => Candidato)
+@JoinColumn({ name: 'candidato_id' })
+candidato: Candidato;
 }
 
 @Entity('habilidades')
