@@ -10,6 +10,11 @@ export class VagaController {
   async getVagasByEmpresa(@Param('empresa_id') empresa_id: number): Promise<Vaga[]> {
     return this.vagaService.findByEmpresaId(empresa_id);
   }
+  
+  @Get('vaga/:id')
+  async getVagaById(@Param('id') id: number): Promise<Vaga> {
+    return this.vagaService.findById(id);
+  }
 
   @Post()
   async createVaga(@Body() vagaData: Partial<Vaga>): Promise<Vaga> {

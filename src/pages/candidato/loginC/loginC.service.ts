@@ -77,6 +77,7 @@ export class LoginCService {
     if (dados.bairro) candidato.bairro = dados.bairro;
     if (dados.cidade) candidato.cidade = dados.cidade;
     if (dados.estado) candidato.estado = dados.estado;
+    if (dados.numero) candidato.numero = dados.numero;
   
     // Salvar as alterações no banco
     await this.candidatoRepository.save(candidato);

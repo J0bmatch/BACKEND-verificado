@@ -2,27 +2,57 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Vaga } from '../vaga.entity';
-// 71 72 in: 1 2
+import { Habilidades, Interesses } from 'src/pages/ambos/compartilhado.entity';
+
 @Injectable()
 export class VagaService {
   constructor(
     @InjectRepository(Vaga)
     private vagaRepository: Repository<Vaga>,
+
+    @InjectRepository(Habilidades)  // Injeção do repositório de Habilidades
+    private readonly habilidadesRepository: Repository<Habilidades>,
+
+    @InjectRepository(Interesses)  // Injeção do repositório de Habilidades
+    private readonly interessesRepository: Repository<Interesses>,
   ) {}
 
   async findByEmpresaId(empresaId: number): Promise<Vaga[]> {
     return this.vagaRepository.find({
-      where: { empresa: { id: empresaId } }, // Usamos o relacionamento com `Empresa`
+      where: { empresa: { id: empresaId } }, // Usamos o relacionamento com Empresa
       relations: ['empresa', 'habilidades', 'interesses'], // Carrega as relações associadas
     });
   }
 
+   // Método para buscar vaga por ID
+   async findById(id: number): Promise<Vaga> {
+    const vaga = await this.vagaRepository.findOne({
+      where: { id },
+      relations: ['empresa', 'habilidades', 'interesses'], // Relacionamentos necessários
+    });
+
+    if (!vaga) {
+      throw new NotFoundException('Vaga não encontrada.');
+    }
+
+    return vaga;
+  }
+
   async createVaga(vagaData: Partial<Vaga>): Promise<Vaga> {
-    // Verifica se o campo `empresa` e `empresa.id` estão presentes
+    // Verifica se o campo empresa e empresa.id estão presentes
     if (!vagaData.empresa || !vagaData.empresa.id) {
       throw new Error("O campo 'empresa' com um ID válido é obrigatório.");
     }
+    if (vagaData.habilidades) {
+      const habilidades = await this.habilidadesRepository.findByIds(vagaData.habilidades);
+      vagaData.habilidades = habilidades;
+    }
   
+    // Atualizando interesses
+    if (vagaData.interesses) {
+      const interesses = await this.interessesRepository.findByIds(vagaData.interesses);
+      vagaData.interesses = interesses;
+    }
     const novaVaga = this.vagaRepository.create({
       descricao: vagaData.descricao,
       exigencias: vagaData.exigencias,
@@ -32,9 +62,9 @@ export class VagaService {
       googleForm: vagaData.googleForm,
       empresa: { id: vagaData.empresa.id },
       habilidades: vagaData.habilidades,
-      interesses: vagaData.interesses,
+      interesses: vagaData.interesses
     });
-  
+    
     return this.vagaRepository.save(novaVaga);
   }
   
@@ -48,4 +78,3 @@ export class VagaService {
     await this.vagaRepository.remove(vaga);
   }
   }
-
