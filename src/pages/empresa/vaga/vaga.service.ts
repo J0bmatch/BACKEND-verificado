@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Vaga } from '../vaga.entity';
 import { Habilidades, Interesses } from 'src/pages/ambos/compartilhado.entity';
+import { ConfirmMatch } from '../../ambos/matching.entity'
 
 @Injectable()
 export class VagaService {
@@ -15,6 +16,9 @@ export class VagaService {
 
     @InjectRepository(Interesses)  // Injeção do repositório de Habilidades
     private readonly interessesRepository: Repository<Interesses>,
+
+    @InjectRepository(ConfirmMatch)  // Injeção do repositório de Habilidades
+    private readonly confirmMatchRepository: Repository<ConfirmMatch>,
   ) {}
 
   async findByEmpresaId(empresaId: number): Promise<Vaga[]> {
@@ -77,4 +81,13 @@ export class VagaService {
     }
     await this.vagaRepository.remove(vaga);
   }
+
+//jkjkjkjkj
+async findAllCandidatesByVaga(vagaId: number): Promise<ConfirmMatch[]> {
+  return this.confirmMatchRepository.find({
+    where: { vaga: { id: vagaId } },
+    relations: ['candidato'], 
+  });
+}
+
   }

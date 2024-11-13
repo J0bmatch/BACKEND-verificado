@@ -22,20 +22,24 @@ export class LoginCService {
 
 
   // Verifica login com RM e data de nascimento
-  async verificarLogin(rm: string, dataNascimento: string): Promise<{ mensagem: string }> {
+  async verificarLogin(rm: string, dataNascimento: string): Promise<{ mensagem: string, id: number }> {
     const candidato = await this.candidatoRepository.findOne({
       where: { rm, dataNascimento },
     });
 
+    const id = 0;
+
     if (!candidato) {
-      return { mensagem: 'Candidato não registrado.' };
+      return { mensagem: 'Candidato não registrado.', id };
     }
+
+    const ids=candidato.id;
 
     const primeiroAcesso = !candidato.bio;
     if (primeiroAcesso) {
-      return { mensagem: 'Primeiro acesso' };
+      return { mensagem: 'Primeiro acesso', id: candidato.id  };
     } else {
-      return { mensagem: 'Acesso já realizado anteriormente' };
+      return { mensagem: 'Acesso já realizado anteriormente', id: candidato.id  };
     }
   }
 
