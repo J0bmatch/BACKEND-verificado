@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 08-Nov-2024 às 00:43
--- Versão do servidor: 10.4.32-MariaDB
--- versão do PHP: 8.2.12
+-- Tempo de geração: 19/11/2024 às 17:38
+-- Versão do servidor: 5.6.25-log
+-- Versão do PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,14 +20,15 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `jobmatch`
 --
-CREATE DATABASE `jobmatch` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `jobmatch`;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `candidato`
+-- Estrutura para tabela `candidato`
 --
+create database jobmatch;
+use jobmatch;
+
 
 CREATE TABLE `candidato` (
   `id` int(11) NOT NULL,
@@ -53,10 +54,10 @@ CREATE TABLE `candidato` (
   `bairro` varchar(20) DEFAULT NULL,
   `cidade` varchar(20) DEFAULT NULL,
   `estado` varchar(2) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Extraindo dados da tabela `candidato`
+-- Despejando dados para a tabela `candidato`
 --
 
 INSERT INTO `candidato` (`id`, `nome`, `email`, `idiomas`, `fluencia`, `nomesocial`, `numero`, `tipodeficiencia`, `graudeficiencia`, `adaptacaodeficiencia`, `bio`, `experiencia`, `telefone`, `dataNascimento`, `rm`, `curso`, `instituicao`, `endereco_id`, `cep`, `rua`, `bairro`, `cidade`, `estado`) VALUES
@@ -121,27 +122,27 @@ INSERT INTO `candidato` (`id`, `nome`, `email`, `idiomas`, `fluencia`, `nomesoci
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `candidato_endereco`
+-- Estrutura para tabela `candidato_endereco`
 --
 
 CREATE TABLE `candidato_endereco` (
   `candidatoId` int(11) NOT NULL,
   `enderecoEnderecoId` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `candidato_habilidades`
+-- Estrutura para tabela `candidato_habilidades`
 --
 
 CREATE TABLE `candidato_habilidades` (
   `candidatoId` int(11) NOT NULL,
   `habilidadesId` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Extraindo dados da tabela `candidato_habilidades`
+-- Despejando dados para a tabela `candidato_habilidades`
 --
 
 INSERT INTO `candidato_habilidades` (`candidatoId`, `habilidadesId`) VALUES
@@ -159,7 +160,7 @@ INSERT INTO `candidato_habilidades` (`candidatoId`, `habilidadesId`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `candidato_id`
+-- Estrutura para tabela `candidato_id`
 --
 
 CREATE TABLE `candidato_id` (
@@ -167,21 +168,21 @@ CREATE TABLE `candidato_id` (
   `enderecoEnderecoId` int(11) NOT NULL,
   `habilidadesId` int(11) NOT NULL,
   `interessesId` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `candidato_interesses`
+-- Estrutura para tabela `candidato_interesses`
 --
 
 CREATE TABLE `candidato_interesses` (
   `candidatoId` int(11) NOT NULL,
   `interessesId` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Extraindo dados da tabela `candidato_interesses`
+-- Despejando dados para a tabela `candidato_interesses`
 --
 
 INSERT INTO `candidato_interesses` (`candidatoId`, `interessesId`) VALUES
@@ -200,18 +201,18 @@ INSERT INTO `candidato_interesses` (`candidatoId`, `interessesId`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `confirmmatch`
+-- Estrutura para tabela `confirmmatch`
 --
 
 CREATE TABLE `confirmmatch` (
   `id` int(11) NOT NULL,
   `vaga_id` int(11) NOT NULL,
   `candidato_id` int(11) NOT NULL,
-  `iscontratado` tinyint(1) DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `iscontratado` tinyint(1) DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Extraindo dados da tabela `confirmmatch`
+-- Despejando dados para a tabela `confirmmatch`
 --
 
 INSERT INTO `confirmmatch` (`id`, `vaga_id`, `candidato_id`, `iscontratado`) VALUES
@@ -220,7 +221,7 @@ INSERT INTO `confirmmatch` (`id`, `vaga_id`, `candidato_id`, `iscontratado`) VAL
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `empresa`
+-- Estrutura para tabela `empresa`
 --
 
 CREATE TABLE `empresa` (
@@ -241,29 +242,31 @@ CREATE TABLE `empresa` (
   `bairro` varchar(50) NOT NULL,
   `cidade` varchar(50) NOT NULL,
   `estado` varchar(50) NOT NULL,
-  `pais` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `pais` varchar(50) NOT NULL,
+  `segatuacao` varchar(30) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Extraindo dados da tabela `empresa`
+-- Despejando dados para a tabela `empresa`
 --
 
-INSERT INTO `empresa` (`id`, `descricao`, `segmentoatuacao_id`, `cnpj`, `telefone`, `email`, `fotoperfil`, `nomeUltilizador`, `senha`, `nomeEmpresa`, `numero`, `complemento`, `cep`, `rua`, `bairro`, `cidade`, `estado`, `pais`) VALUES
-(1, 'Empresa 1 descrição', 1, '12.345.678/0001-90', '(11) 98765-4321', 'empresa1@email.com', 'foto1.jpg', 'usuario1', 'senha1', 'Empresa 1', '100', 'Complemento 1', '01010-010', 'Rua A', 'Bairro A', 'Cidade A', 'Estado A', 'Brasil'),
-(2, 'Empresa 2 descrição', 2, '23.456.789/0001-01', '(21) 91234-5678', 'empresa2@email.com', 'foto2.jpg', 'usuario2', 'senha2', 'Empresa 2', '200', 'Complemento 2', '02020-020', 'Rua B', 'Bairro B', 'Cidade B', 'Estado B', 'Brasil'),
-(3, 'Empresa 3 descrição', 3, '34.567.890/0001-12', '(31) 93456-7890', 'empresa3@email.com', 'foto3.jpg', 'usuario3', 'senha3', 'Empresa 3', '300', 'Complemento 3', '03030-030', 'Rua C', 'Bairro C', 'Cidade C', 'Estado C', 'Brasil'),
-(4, 'Empresa 4 descrição', 4, '45.678.901/0001-23', '(41) 94567-8901', 'empresa4@email.com', 'foto4.jpg', 'usuario4', 'senha4', 'Empresa 4', '400', 'Complemento 4', '04040-040', 'Rua D', 'Bairro D', 'Cidade D', 'Estado D', 'Brasil'),
-(5, 'Empresa 5 descrição', 5, '56.789.012/0001-34', '(51) 95678-9012', 'empresa5@email.com', 'foto5.jpg', 'usuario5', 'senha5', 'Empresa 5', '500', 'Complemento 5', '05050-050', 'Rua E', 'Bairro E', 'Cidade E', 'Estado E', 'Brasil'),
-(6, 'Empresa 6 descrição', 6, '67.890.123/0001-45', '(61) 96789-0123', 'empresa6@email.com', 'foto6.jpg', 'usuario6', 'senha6', 'Empresa 6', '600', 'Complemento 6', '06060-060', 'Rua F', 'Bairro F', 'Cidade F', 'Estado F', 'Brasil'),
-(7, 'Empresa 7 descrição', 7, '78.901.234/0001-56', '(71) 97890-1234', 'empresa7@email.com', 'foto7.jpg', 'usuario7', 'senha7', 'Empresa 7', '700', 'Complemento 7', '07070-070', 'Rua G', 'Bairro G', 'Cidade G', 'Estado G', 'Brasil'),
-(8, 'Empresa 8 descrição', 8, '89.012.345/0001-67', '(81) 98901-2345', 'empresa8@email.com', 'foto8.jpg', 'usuario8', 'senha8', 'Empresa 8', '800', 'Complemento 8', '08080-080', 'Rua H', 'Bairro H', 'Cidade H', 'Estado H', 'Brasil'),
-(9, 'Empresa 9 descrição', 9, '90.123.456/0001-78', '(91) 99012-3456', 'empresa9@email.com', 'foto9.jpg', 'usuario9', 'senha9', 'Empresa 9', '900', 'Complemento 9', '09090-090', 'Rua I', 'Bairro I', 'Cidade I', 'Estado I', 'Brasil'),
-(10, 'Empresa 10 descrição', 10, '01.234.567/0001-89', '(11) 91234-5678', 'empresa10@email.com', 'foto10.jpg', 'usuario10', 'senha10', 'Empresa 10', '1000', 'Complemento 10', '10010-100', 'Rua J', 'Bairro J', 'Cidade J', 'Estado J', 'Brasil');
+INSERT INTO `empresa` (`id`, `descricao`, `segmentoatuacao_id`, `cnpj`, `telefone`, `email`, `fotoperfil`, `nomeUltilizador`, `senha`, `nomeEmpresa`, `numero`, `complemento`, `cep`, `rua`, `bairro`, `cidade`, `estado`, `pais`, `segatuacao`) VALUES
+(1, 'Empresa 1 descrição', 1, '12.345.678/0001-90', '(11) 98765-4321', 'empresa1@email.com', 'foto1.jpg', 'usuario1', 'senha1', 'Empresa 1', '100', 'Complemento 1', '01010-010', 'Rua A', 'Bairro A', 'Cidade A', 'Estado A', 'Brasil', NULL),
+(2, 'Empresa 2 descrição', 2, '23.456.789/0001-01', '(21) 91234-5678', 'empresa2@email.com', 'foto2.jpg', 'usuario2', 'senha2', 'Empresa 2', '200', 'Complemento 2', '02020-020', 'Rua B', 'Bairro B', 'Cidade B', 'Estado B', 'Brasil', NULL),
+(3, 'Empresa 3 descrição', 3, '34.567.890/0001-12', '(31) 93456-7890', 'empresa3@email.com', 'foto3.jpg', 'usuario3', 'senha3', 'Empresa 3', '300', 'Complemento 3', '03030-030', 'Rua C', 'Bairro C', 'Cidade C', 'Estado C', 'Brasil', NULL),
+(4, 'Empresa 4 descrição', 4, '45.678.901/0001-23', '(41) 94567-8901', 'empresa4@email.com', 'foto4.jpg', 'usuario4', 'senha4', 'Empresa 4', '400', 'Complemento 4', '04040-040', 'Rua D', 'Bairro D', 'Cidade D', 'Estado D', 'Brasil', NULL),
+(5, 'Empresa 5 descrição', 5, '56.789.012/0001-34', '(51) 95678-9012', 'empresa5@email.com', 'foto5.jpg', 'usuario5', 'senha5', 'Empresa 5', '500', 'Complemento 5', '05050-050', 'Rua E', 'Bairro E', 'Cidade E', 'Estado E', 'Brasil', NULL),
+(6, 'Empresa 6 descrição', 6, '67.890.123/0001-45', '(61) 96789-0123', 'empresa6@email.com', 'foto6.jpg', 'usuario6', 'senha6', 'Empresa 6', '600', 'Complemento 6', '06060-060', 'Rua F', 'Bairro F', 'Cidade F', 'Estado F', 'Brasil', NULL),
+(7, 'Empresa 7 descrição', 7, '78.901.234/0001-56', '(71) 97890-1234', 'empresa7@email.com', 'foto7.jpg', 'usuario7', 'senha7', 'Empresa 7', '700', 'Complemento 7', '07070-070', 'Rua G', 'Bairro G', 'Cidade G', 'Estado G', 'Brasil', NULL),
+(8, 'Empresa 8 descrição', 8, '89.012.345/0001-67', '(81) 98901-2345', 'empresa8@email.com', 'foto8.jpg', 'usuario8', 'senha8', 'Empresa 8', '800', 'Complemento 8', '08080-080', 'Rua H', 'Bairro H', 'Cidade H', 'Estado H', 'Brasil', NULL),
+(9, 'Empresa 9 descrição', 9, '90.123.456/0001-78', '(91) 99012-3456', 'empresa9@email.com', 'foto9.jpg', 'usuario9', 'senha9', 'Empresa 9', '900', 'Complemento 9', '09090-090', 'Rua I', 'Bairro I', 'Cidade I', 'Estado I', 'Brasil', NULL),
+(10, 'Empresa 10 descrição', 10, '01.234.567/0001-89', '(11) 91234-5678', 'empresa10@email.com', 'foto10.jpg', 'usuario10', 'senha10', 'Empresa 10', '1000', 'Complemento 10', '10010-100', 'Rua J', 'Bairro J', 'Cidade J', 'Estado J', 'Brasil', NULL),
+(11, 'Descrição da empresa.', NULL, '12345678901234', '123456789', 'empresa@exemplo.com', 'foto.jpg', 'usuario123', 'senhaSegura', 'Empresa Exemplo', '123', 'Sala 1', '126584', 'Rua Exemplo', 'Bairro Exemplo', 'Cidade Exemplo', 'SP', 'Brasil', 'fds');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `endereco`
+-- Estrutura para tabela `endereco`
 --
 
 CREATE TABLE `endereco` (
@@ -273,10 +276,10 @@ CREATE TABLE `endereco` (
   `bairro` varchar(20) NOT NULL,
   `cidade` varchar(20) NOT NULL,
   `estado` varchar(2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Extraindo dados da tabela `endereco`
+-- Despejando dados para a tabela `endereco`
 --
 
 INSERT INTO `endereco` (`endereco_id`, `cep`, `rua`, `bairro`, `cidade`, `estado`) VALUES
@@ -294,7 +297,7 @@ INSERT INTO `endereco` (`endereco_id`, `cep`, `rua`, `bairro`, `cidade`, `estado
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `formacaoacademica`
+-- Estrutura para tabela `formacaoacademica`
 --
 
 CREATE TABLE `formacaoacademica` (
@@ -303,12 +306,12 @@ CREATE TABLE `formacaoacademica` (
   `instituicao` varchar(50) DEFAULT NULL,
   `cidade` varchar(20) DEFAULT NULL,
   `estado` varchar(2) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `formacao_academica`
+-- Estrutura para tabela `formacao_academica`
 --
 
 CREATE TABLE `formacao_academica` (
@@ -317,22 +320,22 @@ CREATE TABLE `formacao_academica` (
   `instituicao` varchar(50) NOT NULL,
   `cidade` varchar(20) NOT NULL,
   `estado` varchar(2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `habilidades`
+-- Estrutura para tabela `habilidades`
 --
 
 CREATE TABLE `habilidades` (
   `id` int(11) NOT NULL,
   `tipo` varchar(50) NOT NULL,
   `descricao` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Extraindo dados da tabela `habilidades`
+-- Despejando dados para a tabela `habilidades`
 --
 
 INSERT INTO `habilidades` (`id`, `tipo`, `descricao`) VALUES
@@ -397,17 +400,17 @@ INSERT INTO `habilidades` (`id`, `tipo`, `descricao`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `interesses`
+-- Estrutura para tabela `interesses`
 --
 
 CREATE TABLE `interesses` (
   `id` int(11) NOT NULL,
   `descricao` varchar(50) NOT NULL,
   `tipo` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Extraindo dados da tabela `interesses`
+-- Despejando dados para a tabela `interesses`
 --
 
 INSERT INTO `interesses` (`id`, `descricao`, `tipo`) VALUES
@@ -468,17 +471,17 @@ INSERT INTO `interesses` (`id`, `descricao`, `tipo`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `segmentoatuacao`
+-- Estrutura para tabela `segmentoatuacao`
 --
 
 CREATE TABLE `segmentoatuacao` (
   `id` int(11) NOT NULL,
   `descricao` text NOT NULL,
   `setor` varchar(15) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Extraindo dados da tabela `segmentoatuacao`
+-- Despejando dados para a tabela `segmentoatuacao`
 --
 
 INSERT INTO `segmentoatuacao` (`id`, `descricao`, `setor`) VALUES
@@ -496,7 +499,7 @@ INSERT INTO `segmentoatuacao` (`id`, `descricao`, `setor`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `vaga`
+-- Estrutura para tabela `vaga`
 --
 
 CREATE TABLE `vaga` (
@@ -508,10 +511,10 @@ CREATE TABLE `vaga` (
   `empresa_id` int(11) DEFAULT NULL,
   `funcao` varchar(500) NOT NULL,
   `googleForm` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Extraindo dados da tabela `vaga`
+-- Despejando dados para a tabela `vaga`
 --
 
 INSERT INTO `vaga` (`id`, `descricao`, `exigencias`, `salario`, `riscos`, `empresa_id`, `funcao`, `googleForm`) VALUES
@@ -529,16 +532,16 @@ INSERT INTO `vaga` (`id`, `descricao`, `exigencias`, `salario`, `riscos`, `empre
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `vaga_habilidades`
+-- Estrutura para tabela `vaga_habilidades`
 --
 
 CREATE TABLE `vaga_habilidades` (
   `vaga_id` int(11) NOT NULL,
   `habilidades_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Extraindo dados da tabela `vaga_habilidades`
+-- Despejando dados para a tabela `vaga_habilidades`
 --
 
 INSERT INTO `vaga_habilidades` (`vaga_id`, `habilidades_id`) VALUES
@@ -556,16 +559,16 @@ INSERT INTO `vaga_habilidades` (`vaga_id`, `habilidades_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `vaga_interesses`
+-- Estrutura para tabela `vaga_interesses`
 --
 
 CREATE TABLE `vaga_interesses` (
   `vaga_id` int(11) NOT NULL,
   `interesses_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Extraindo dados da tabela `vaga_interesses`
+-- Despejando dados para a tabela `vaga_interesses`
 --
 
 INSERT INTO `vaga_interesses` (`vaga_id`, `interesses_id`) VALUES
@@ -585,14 +588,14 @@ INSERT INTO `vaga_interesses` (`vaga_id`, `interesses_id`) VALUES
 --
 
 --
--- Índices para tabela `candidato`
+-- Índices de tabela `candidato`
 --
 ALTER TABLE `candidato`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `REL_20bea763739ba952ded05fd68b` (`endereco_id`);
 
 --
--- Índices para tabela `candidato_endereco`
+-- Índices de tabela `candidato_endereco`
 --
 ALTER TABLE `candidato_endereco`
   ADD PRIMARY KEY (`candidatoId`,`enderecoEnderecoId`),
@@ -600,7 +603,7 @@ ALTER TABLE `candidato_endereco`
   ADD KEY `IDX_f205b8e5dc2571fa5e9a4a3c63` (`enderecoEnderecoId`);
 
 --
--- Índices para tabela `candidato_habilidades`
+-- Índices de tabela `candidato_habilidades`
 --
 ALTER TABLE `candidato_habilidades`
   ADD PRIMARY KEY (`candidatoId`,`habilidadesId`),
@@ -608,17 +611,14 @@ ALTER TABLE `candidato_habilidades`
   ADD KEY `IDX_701f651ddefd853c531c1561c8` (`habilidadesId`);
 
 --
--- Índices para tabela `candidato_id`
+-- Índices de tabela `candidato_id`
 --
 ALTER TABLE `candidato_id`
   ADD PRIMARY KEY (`interessesId`,`candidatoId`),
-  ADD KEY `IDX_1b1de203b9c7c62178f3a751fb` (`candidatoId`),
-  ADD KEY `IDX_913638c1edd9f0a15cb759dcf3` (`enderecoEnderecoId`),
-  ADD KEY `IDX_18be7c534276cd9446b61f8dd4` (`habilidadesId`),
-  ADD KEY `IDX_4f96a9fcadb480d28bfa1d99d2` (`interessesId`);
+  ADD KEY `IDX_1b1de203b9c7c62178f3a751fb` (`candidatoId`);
 
 --
--- Índices para tabela `candidato_interesses`
+-- Índices de tabela `candidato_interesses`
 --
 ALTER TABLE `candidato_interesses`
   ADD PRIMARY KEY (`candidatoId`,`interessesId`),
@@ -626,7 +626,7 @@ ALTER TABLE `candidato_interesses`
   ADD KEY `IDX_6116b19138c66c034df5358a56` (`interessesId`);
 
 --
--- Índices para tabela `confirmmatch`
+-- Índices de tabela `confirmmatch`
 --
 ALTER TABLE `confirmmatch`
   ADD PRIMARY KEY (`id`),
@@ -634,57 +634,55 @@ ALTER TABLE `confirmmatch`
   ADD KEY `candidato_id` (`candidato_id`);
 
 --
--- Índices para tabela `empresa`
+-- Índices de tabela `empresa`
 --
 ALTER TABLE `empresa`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `FK_c4b9b035f5892d1ba3620902073` (`segmentoatuacao_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `endereco`
+-- Índices de tabela `endereco`
 --
 ALTER TABLE `endereco`
   ADD PRIMARY KEY (`endereco_id`);
 
 --
--- Índices para tabela `formacaoacademica`
+-- Índices de tabela `formacaoacademica`
 --
 ALTER TABLE `formacaoacademica`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `formacao_academica`
+-- Índices de tabela `formacao_academica`
 --
 ALTER TABLE `formacao_academica`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `habilidades`
+-- Índices de tabela `habilidades`
 --
 ALTER TABLE `habilidades`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `interesses`
+-- Índices de tabela `interesses`
 --
 ALTER TABLE `interesses`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `segmentoatuacao`
+-- Índices de tabela `segmentoatuacao`
 --
 ALTER TABLE `segmentoatuacao`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `vaga`
+-- Índices de tabela `vaga`
 --
 ALTER TABLE `vaga`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `FK_976dff194a4c7e9b8c8dbd95077` (`empresa_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `vaga_habilidades`
+-- Índices de tabela `vaga_habilidades`
 --
 ALTER TABLE `vaga_habilidades`
   ADD PRIMARY KEY (`vaga_id`,`habilidades_id`),
@@ -692,7 +690,7 @@ ALTER TABLE `vaga_habilidades`
   ADD KEY `IDX_71cc27fe84d3ca6633fbd86b65` (`habilidades_id`);
 
 --
--- Índices para tabela `vaga_interesses`
+-- Índices de tabela `vaga_interesses`
 --
 ALTER TABLE `vaga_interesses`
   ADD PRIMARY KEY (`vaga_id`,`interesses_id`),
@@ -700,7 +698,7 @@ ALTER TABLE `vaga_interesses`
   ADD KEY `IDX_d04ef7d8eabb493102d0d9af46` (`interesses_id`);
 
 --
--- AUTO_INCREMENT de tabelas despejadas
+-- AUTO_INCREMENT para tabelas despejadas
 --
 
 --
@@ -719,7 +717,7 @@ ALTER TABLE `confirmmatch`
 -- AUTO_INCREMENT de tabela `empresa`
 --
 ALTER TABLE `empresa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de tabela `endereco`
@@ -764,66 +762,45 @@ ALTER TABLE `vaga`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- Restrições para despejos de tabelas
+-- Restrições para tabelas despejadas
 --
 
 --
--- Limitadores para a tabela `candidato`
---
-ALTER TABLE `candidato`
-  ADD CONSTRAINT `FK_20bea763739ba952ded05fd68b4` FOREIGN KEY (`endereco_id`) REFERENCES `endereco` (`endereco_id`);
-
---
--- Limitadores para a tabela `candidato_habilidades`
+-- Restrições para tabelas `candidato_habilidades`
 --
 ALTER TABLE `candidato_habilidades`
   ADD CONSTRAINT `FK_701f651ddefd853c531c1561c80` FOREIGN KEY (`habilidadesId`) REFERENCES `habilidades` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_eae83eccd2405638ff9873857be` FOREIGN KEY (`candidatoId`) REFERENCES `candidato` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `candidato_id`
+-- Restrições para tabelas `candidato_id`
 --
 ALTER TABLE `candidato_id`
-  ADD CONSTRAINT `FK_18be7c534276cd9446b61f8dd41` FOREIGN KEY (`habilidadesId`) REFERENCES `habilidades` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_1b1de203b9c7c62178f3a751fb1` FOREIGN KEY (`candidatoId`) REFERENCES `candidato` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_4f96a9fcadb480d28bfa1d99d29` FOREIGN KEY (`interessesId`) REFERENCES `interesses` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_913638c1edd9f0a15cb759dcf3e` FOREIGN KEY (`enderecoEnderecoId`) REFERENCES `endereco` (`endereco_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `FK_1b1de203b9c7c62178f3a751fb1` FOREIGN KEY (`candidatoId`) REFERENCES `candidato` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `candidato_interesses`
+-- Restrições para tabelas `candidato_interesses`
 --
 ALTER TABLE `candidato_interesses`
   ADD CONSTRAINT `FK_41bf39b22738e2be065dd805c47` FOREIGN KEY (`candidatoId`) REFERENCES `candidato` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_6116b19138c66c034df5358a564` FOREIGN KEY (`interessesId`) REFERENCES `interesses` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `confirmmatch`
+-- Restrições para tabelas `confirmmatch`
 --
 ALTER TABLE `confirmmatch`
   ADD CONSTRAINT `confirmmatch_ibfk_1` FOREIGN KEY (`vaga_id`) REFERENCES `vaga` (`id`),
   ADD CONSTRAINT `confirmmatch_ibfk_2` FOREIGN KEY (`candidato_id`) REFERENCES `candidato` (`id`);
 
 --
--- Limitadores para a tabela `empresa`
---
-ALTER TABLE `empresa`
-  ADD CONSTRAINT `FK_c4b9b035f5892d1ba3620902073` FOREIGN KEY (`segmentoatuacao_id`) REFERENCES `segmentoatuacao` (`id`);
-
---
--- Limitadores para a tabela `vaga`
---
-ALTER TABLE `vaga`
-  ADD CONSTRAINT `FK_976dff194a4c7e9b8c8dbd95077` FOREIGN KEY (`empresa_id`) REFERENCES `empresa` (`id`);
-
---
--- Limitadores para a tabela `vaga_habilidades`
+-- Restrições para tabelas `vaga_habilidades`
 --
 ALTER TABLE `vaga_habilidades`
   ADD CONSTRAINT `FK_3a77dc49796e16dc9b855fd46ad` FOREIGN KEY (`vaga_id`) REFERENCES `vaga` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_71cc27fe84d3ca6633fbd86b65f` FOREIGN KEY (`habilidades_id`) REFERENCES `habilidades` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `vaga_interesses`
+-- Restrições para tabelas `vaga_interesses`
 --
 ALTER TABLE `vaga_interesses`
   ADD CONSTRAINT `FK_bf6bfea9911f754569d5c3018dc` FOREIGN KEY (`vaga_id`) REFERENCES `vaga` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,

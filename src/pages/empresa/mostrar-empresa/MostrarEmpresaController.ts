@@ -5,13 +5,8 @@ import { MostrarEmpresaService } from './MostrarEmpresaService';
 export class MostrarEmpresaController {
   constructor(private readonly mostrarEmpresaService: MostrarEmpresaService) {}
 
-  @Get('/top')
-  async getTop10Empresas() {
-    return await this.mostrarEmpresaService.getTop10EmpresasByVagas();
-  }
-  @Get('/:id')
+  @Get(':id')
   async mostrar(@Param('id', ParseIntPipe) id: number) {
     return await this.mostrarEmpresaService.mostrar(id);
   }
-
 }

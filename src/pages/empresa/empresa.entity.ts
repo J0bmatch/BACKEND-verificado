@@ -15,6 +15,9 @@ export class Empresa {
   @Column()
   email: string;
 
+  @Column({ length: 30 })
+  segatuacao: string;
+
   @Column({ length: 9 })
   cep: string;
 

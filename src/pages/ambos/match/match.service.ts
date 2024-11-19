@@ -3,15 +3,20 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Vaga } from '../../empresa/vaga.entity';
 import { Candidato } from '../../candidato/candidato.entity';
+import { ConfirmMatch } from '../matching.entity';
+
 
 @Injectable()
 export class MatchService {
   constructor(
     @InjectRepository(Vaga)
     private readonly vagaRepository: Repository<Vaga>,
-    
+
     @InjectRepository(Candidato)
     private readonly candidatoRepository: Repository<Candidato>,
+
+    @InjectRepository(ConfirmMatch)
+    private readonly confirmMatchRepository: Repository<ConfirmMatch>,
   ) {}
 
   async findMatchingVagas(candidatoId: number): Promise<Vaga[]> {
@@ -53,5 +58,14 @@ export class MatchService {
       .map(v => v.vaga);
 
     return vagasOrdenadas;
+  }
+
+  async findCandidatosByVaga(vagaId: number): Promise<Candidato[]> {
+    const confirmMatches = await this.confirmMatchRepository.find({
+      where: { vaga: { id: vagaId } },
+      relations: ['candidato'], // Carrega a relação do candidato
+    });
+
+    return confirmMatches.map(match => match.candidato);
   }
 }
