@@ -18,19 +18,33 @@ export class ConfirmMatchService {
   ) {}
 
   async confirmarMatch(vagaId: number, candidatoId: number): Promise<ConfirmMatch> {
-    const vaga = await this.vagaRepository.findOne({ where: { id: vagaId } });
-    const candidato = await this.candidatoRepository.findOne({ where: { id: candidatoId } });
+    const vaga = await this.vagaRepository
+  .createQueryBuilder('vaga')
+  .where('vaga.id = :id', { id: vagaId })
+  .getOne();
 
-    if (!vaga || !candidato) {
-      throw new Error('Vaga ou candidato não encontrados');
-    }
+const candidato = await this.candidatoRepository
+  .createQueryBuilder('candidato')
+  .where('candidato.id = :id', { id: candidatoId })
+  .getOne();
 
+console.log('Vaga encontrada (query builder):', vaga);
+console.log('Candidato encontrado (query builder):', candidato);
+
+    console.log('Vaga encontrada:', vaga);
+    console.log('Candidato encontrado:', candidato);
+  
     const confirmMatch = new ConfirmMatch();
     confirmMatch.vaga = vaga;
     confirmMatch.candidato = candidato;
-    
+  
+  
+    console.log('Parâmetros recebidos - vagaId:', vagaId, 'candidatoId:', candidatoId);
+
     return this.confirmMatchRepository.save(confirmMatch);
   }
+  
+  /* outra coisa */
 
   async contratarMatch(id: number): Promise<ConfirmMatch> {
     const match = await this.confirmMatchRepository.findOne({ where: { id } });
